@@ -11,6 +11,7 @@ const vuetify = new Vuetify({
         primary: "#02A2DE",
         text: "#707070",
         input: "#ECF7FD",
+        faded: "#F1F1F1",
         secondary: "#33B47F",
         header: "#000029",
         footer: "#393E6A",

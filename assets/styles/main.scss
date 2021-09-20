@@ -1,0 +1,22 @@
+/*===== VARIABLES CSS =====*/
+:root {
+	--header-height: 3rem;
+
+	/*========== Colors ==========*/
+	--first-color: #da2535;
+
+	/*========== Font and typography ==========*/
+	--body-font: 'Poppins', sans-serif;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+*,
+html,
+body {
+	margin: 0;
+	font-family: var(--body-font);
+}

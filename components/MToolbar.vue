@@ -7,7 +7,7 @@
             <img
               :src="Logo"
               alt="Healthgear logo"
-              height="30px"
+              height="20px"
               class="text-uppercase primary--text"
           /></NuxtLink>
         </span>

@@ -21,4 +21,16 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+a {
+  text-decoration: none !important;
+}
+
+.v-text-field--rounded {
+  border-radius: 15px !important;
+}
+
+.theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
+    background: #FFFFFF !important;
+}
+</style>

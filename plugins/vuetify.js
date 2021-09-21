@@ -1,10 +1,7 @@
-import Vue from "vue"
-import Vuetify from "vuetify/lib"
-
-Vue.use(Vuetify)
+import Vue from "vue";
+import Vuetify from "vuetify/lib";
 
 const vuetify = new Vuetify({
-  iconfont: "mdi",
   theme: {
     themes: {
       light: {
@@ -19,10 +16,10 @@ const vuetify = new Vuetify({
         white: "#FFFFFF",
         grey: "#8F8B8B",
         lightPurple: "#F8F7FC",
-        revBlack: "#333333",
-      },
-    },
-  },
-})
+        revBlack: "#333333"
+      }
+    }
+  }
+});
 
-export default vuetify
+export default vuetify;

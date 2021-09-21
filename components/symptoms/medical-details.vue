@@ -1,18 +1,20 @@
 <template>
   <div>
-    <v-form>
-      <v-col cols="12">
+    <v-row no-gutters justify="center" class="mx-auto">
+      <v-col cols="12" md="9">
         <div class="font-weight-light">Age</div>
         <v-text-field
           v-model="age"
           placeholder="Select age"
-          :disabled="age != null"
           title="Age"
           outlined
+          color="#02A2DE"
+          background-color="#ECF7FD"
+          rounded
           required
         />
       </v-col>
-      <v-col cols="12">
+      <v-col cols="12" md="9">
         <div class="font-weight-light">Body Weight(kg)</div>
         <v-text-field
           type="number"
@@ -20,24 +22,29 @@
           v-model="user.weight"
           title="body-weight"
           outlined
+          color="#02A2DE"
+          background-color="#ECF7FD"
+          rounded
           required
         ></v-text-field>
       </v-col>
-      <v-col cols="12">
+      <v-col cols="12" md="9">
         <div class="font-weight-light">Gender</div>
-        <v-text-field
-          v-model="user.gender"
+        <v-select
+          v-model="gender"
           placeholder="Select gender"
-          :disabled="user.gender != null"
+          :items="['male', 'female']"
           title="gender"
+          color="#02A2DE"
           outlined
+          rounded
+          background-color="#ECF7FD"
           required
-        ></v-text-field>
+        ></v-select>
 
         <!-- @click="processForm"
               :loading="saving" -->
-      </v-col></v-form
-    >
+      </v-col></v-row>
   </div>
 </template>
 <script>
@@ -109,10 +116,6 @@ export default {
 };
 </script>
 <style>
-/* .container {
-  max-width: 1370px;
-  margin: auto;
-} */
 div.a-result.col-md-6.col-12 {
   padding-bottom: 0px;
   /* margin-left: 5px; */

@@ -4,6 +4,7 @@
     <MToolbar v-else />
     <v-main>
       <Nuxt />
+      <Snackbar />
     </v-main>
     <Footer />
     <Snackbar />

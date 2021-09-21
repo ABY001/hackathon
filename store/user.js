@@ -3,13 +3,13 @@ export const state = () => ({
   });
   
   export const mutations = {
-    setSymptoms(state, user) {
+    SET_USER(state, user) {
       state.user = user;
     }
   };
   
   export const getters = {
-    getSymptoms(state) {
+    GET_USER(state) {
       return state.user;
     }
   };

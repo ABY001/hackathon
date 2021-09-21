@@ -4,7 +4,6 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: "%s | Healthgear",
     title: "Healthgear",
     htmlAttrs: {
       lang: "en"
@@ -48,7 +47,7 @@ export default {
     baseURL:
       process.env.NODE_ENV === "production"
         ? process.env.BASE_URL
-        : `http://localhost:4000`
+        : `http://localhost:4000/api/v1`
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -33,97 +33,23 @@
 
       <v-stepper-items>
         <v-stepper-content step="1">
-          <v-card class="mb-12" color="lighten-1">
-            <medical-details />
-          </v-card>
-          <v-row no-gutters justify="center" class="mx-auto">
-            <v-col cols="12" md="9">
-              <v-btn
-                color="#33B47F"
-                @click="e1 = 2"
-                height="61px"
-                class="continue-btn"
-                block
-                large
-              >
-                <span class="white--text">Next</span>
-              </v-btn>
-            </v-col></v-row
-          >
+          <medical-details @next="next" />
         </v-stepper-content>
 
         <v-stepper-content step="2">
-          <v-card class="mb-12" color="lighten-1">
-            <symptom-selection />
-          </v-card>
-          <v-row no-gutters justify="center" class="mx-auto">
-            <v-col cols="12" md="9">
-              <v-btn
-                color="#33B47F"
-                @click="e1 = 3"
-                height="61px"
-                class="continue-btn"
-                block
-                large
-              >
-                <span class="white--text">Next</span>
-              </v-btn>
-            </v-col></v-row
-          >
+          <symptom-selection @next="next" />
         </v-stepper-content>
 
         <v-stepper-content step="3">
-          <v-card class="mb-12" color="lighten-1">
-            <diagnostic-question />
-          </v-card>
-          <v-row no-gutters justify="center" class="mx-auto">
-            <v-col cols="12" md="9">
-              <v-btn
-                color="#33B47F"
-                @click="e1 = 4"
-                height="61px"
-                class="continue-btn"
-                block
-                large
-              >
-                <span class="white--text">Next</span>
-              </v-btn>
-            </v-col></v-row
-          >
+          <diagnostic-question @next="next" />
         </v-stepper-content>
 
         <v-stepper-content step="4">
-          <v-card class="mb-12" color="lighten-1">
-            <result />
-          </v-card>
-          <v-row no-gutters justify="center" class="mx-auto">
-            <v-col cols="12" md="9">
-              <v-btn
-                color="#33B47F"
-                @click="e1 = 4"
-                height="61px"
-                class="continue-btn"
-                block
-                large
-              >
-                <span class="white--text">Next</span>
-              </v-btn>
-            </v-col></v-row
-          >
+          <result @next="next" />
         </v-stepper-content>
 
         <v-stepper-content step="5">
-          <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card>
-
-          <v-btn text>
-            Cancel
-          </v-btn>
-        </v-stepper-content>
-
-        <v-stepper-content step="4">
-          <v-card class="mb-12" color="lighten-1">
-            <recommendation />
-          </v-card>
+          <recommendation />
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -148,6 +74,11 @@ export default {
     return {
       e1: 1
     };
+  },
+  methods: {
+    next() {
+      this.e1++;
+    }
   }
 };
 </script>

@@ -1,64 +1,86 @@
 <template>
   <div>
+    <v-card class="mb-12" color="lighten-1">
+      <v-row no-gutters justify="center" class="mx-auto">
+        <v-col cols="12" md="9">
+          <div class="text-h5 my-2" style="color: #02A2DE">
+            Add your symptoms
+          </div>
+        </v-col>
+        <v-col cols="12" md="9">
+          <v-divider />
+        </v-col>
+        <v-col cols="12" md="9">
+          <div class="text-subtitle-1 my-2">Search for symptoms</div>
+        </v-col>
+        <v-col cols="12" md="9">
+          <v-autocomplete
+            v-model="newTag"
+            :loading="loading"
+            :items="items"
+            item-text="name"
+            :search-input.sync="search"
+            flat
+            chips
+            multiple
+            outlined
+            light
+            item-value="API"
+            clearable
+            return-object
+            color="#02A2DE"
+            hide-no-data
+            hide-details
+            placeholder="Search e.g. Headache"
+            filled
+            class="search-icon my-3"
+            append-icon="mdi-magnify"
+            style="box-shadow: 0px 0px 16px #02A2DE36; border-radius: 15px;"
+          >
+            <template v-slot:selection="data">
+              <v-chip
+                v-bind="data.attrs"
+                :input-value="data.selected"
+                close
+                @click:close="remove(data.item)"
+              >
+                {{ data.item.name }}
+              </v-chip>
+            </template>
+          </v-autocomplete>
+        </v-col>
+        <v-col cols="12" md="9">
+          <div class="tip-box">
+            <div
+              class="font-weight-light"
+              style="margin:30px 10px; padding 30px"
+            >
+              <div style="font-weight:500; padding-bottom:15px">
+                You can add more than one symptoms
+              </div>
+              <li v-for="newTags in newTag" :key="newTags.id">
+                {{ newTags.name }}
+              </li>
+            </div>
+          </div>
+        </v-col>
+      </v-row>
+    </v-card>
     <v-row no-gutters justify="center" class="mx-auto">
       <v-col cols="12" md="9">
-        <div class="text-h5 my-2" style="color: #02A2DE">Add your symptoms</div>
-      </v-col>
-      <v-col cols="12" md="9">
-        <v-divider />
-      </v-col>
-      <v-col cols="12" md="9">
-        <div class="text-subtitle-1 my-2">Search for symptoms</div>
-      </v-col>
-      <v-col cols="12" md="9">
-        <v-autocomplete
-          v-model="newTag"
+        <v-btn
+          color="#33B47F"
+          @click="next"
           :loading="loading"
-          :items="items"
-          item-text="name"
-          :search-input.sync="search"
-          flat
-          chips
-          multiple
-          outlined
-          light
-          item-value="API"
-          clearable
-          return-object
-          color="#02A2DE"
-          hide-no-data
-          hide-details
-          placeholder="Search e.g. Headache"
-          filled
-          class="search-icon my-3"
-          append-icon="mdi-magnify"
-          style="box-shadow: 0px 0px 16px #02A2DE36; border-radius: 15px;"
+          height="61px"
+          class="continue-btn"
+          block
+          large
         >
-          <template v-slot:selection="data">
-            <v-chip
-              v-bind="data.attrs"
-              :input-value="data.selected"
-              close
-              @click:close="remove(data.item)"
-            >
-              {{ data.item.name }}
-            </v-chip>
-          </template>
-        </v-autocomplete>
-      </v-col>
-      <v-col cols="12" md="9">
-        <div class="tip-box">
-          <div class="font-weight-light" style="margin:30px 10px; padding 30px">
-            <div style="font-weight:500; padding-bottom:15px">
-              You can add more than one symptoms
-            </div>
-            <li v-for="newTags in newTag" :key="newTags.id">
-              {{ newTags.name }}
-            </li>
-          </div>
-        </div>
-      </v-col>
-    </v-row>
+          <span class="white--text">Next</span>
+        </v-btn>
+      </v-col></v-row
+    >
   </div>
 </template>
 
@@ -118,6 +140,9 @@ export default {
     }
   },
   methods: {
+    next() {
+      this.$emit("next");
+    },
     remove(item) {
       const index = this.newTag.indexOf(item);
       if (index >= 0) this.newTag.splice(index, 1);

@@ -22,7 +22,7 @@
         Symptoms checker
       </v-btn>
       </NuxtLink>
-      <NuxtLink :to="'/'">
+      <NuxtLink :to="'/covid-response'">
       <v-btn
         text
         class="mx-0 font-weight-bold text-subtitle-1 navbar-nav"

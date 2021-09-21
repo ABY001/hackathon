@@ -1,71 +1,16 @@
 <template>
   <div>
-    <v-row no-gutters justify="center" class="mx-auto my-6">
-      <v-col cols="12" md="9">
-        <div style="margin-left:50px">
-          <span v-if="questions.type">
-            <v-row v-if="questions.type == 'single'">
-              <v-col cols="12" md="12">
-                <div class="font-weight-light">{{ questions.text }}</div>
-                <v-radio-group v-model="fever">
-                  <v-radio
-                    v-for="(choice, i) in questions.items[0].choices"
-                    :color="
-                      choice.label == 'Yes'
-                        ? 'success'
-                        : choice.label == 'No'
-                        ? 'error'
-                        : 'secondary'
-                    "
-                    :key="i"
-                    :items="choice"
-                    :value="choice"
-                    outlined
-                  >
-                    <template v-slot:label>
-                      <div
-                        :style="[
-                          choice.label == 'Yes'
-                            ? 'color: green'
-                            : choice.label == 'No'
-                            ? 'color: red'
-                            : 'color: blue'
-                        ]"
-                      >
-                        {{ choice.label }}
-                      </div>
-                    </template>
-                  </v-radio>
-                </v-radio-group>
-              </v-col>
-
-              <v-btn
-                large
-                depressed
-                :loading="loading"
-                :disabled="!fever"
-                color="primary"
-                style="width:150px; height:50px"
-                @click="parseSuggestions"
-                >Next question</v-btn
-              >
-            </v-row>
-            <v-row v-else-if="questions.type == 'group_single'">
-              <v-col cols="12" md="12">
-                <div class="font-weight-light">
-                  {{ questions.text }}
-                </div> </v-col
-              ><v-col cols="12" md="12">
-                <v-row justify="space-between">
-                  <v-radio-group
-                    style="width:50%"
-                    v-model="fever"
-                    v-for="(item, i) in questions.items"
-                    :key="i"
-                  >
-                    <div class="font-weight-light">{{ item.name }}</div>
+    <v-card class="mb-12" color="lighten-1">
+      <v-row no-gutters justify="center" class="mx-auto my-6">
+        <v-col cols="12" md="9">
+          <div style="margin-left:50px">
+            <span v-if="questions.type">
+              <v-row v-if="questions.type == 'single'">
+                <v-col cols="12" md="12">
+                  <div class="font-weight-light">{{ questions.text }}</div>
+                  <v-radio-group v-model="fever">
                     <v-radio
-                      v-for="(choice, i) in item.choices"
+                      v-for="(choice, i) in questions.items[0].choices"
                       :color="
                         choice.label == 'Yes'
                           ? 'success'
@@ -92,70 +37,65 @@
                         </div>
                       </template>
                     </v-radio>
-                  </v-radio-group></v-row
+                  </v-radio-group>
+                </v-col>
+
+                <v-btn
+                  large
+                  depressed
+                  :loading="loading"
+                  :disabled="!fever"
+                  color="primary"
+                  style="width:150px; height:50px"
+                  @click="parseSuggestions"
+                  >Next question</v-btn
                 >
-              </v-col>
-              <v-btn
-                large
-                depressed
-                :disabled="!fever"
-                color="primary"
-                style="width:150px; height:50px"
-                @click="parseSuggestionsMultiple"
-                >Next question</v-btn
-              >
-            </v-row>
-            <v-row v-else-if="questions.type == 'group_multiple'">
-              <v-col cols="12" md="9">
-                <div class="font-weight-light">{{ questions.text }}</div>
-              </v-col>
-
-              <v-col cols="12" md="12">
-                <v-row justify="space-between">
-                  <v-radio-group
-                    style="width:50%"
-                    v-model="fever"
-                    v-for="(item, i) in questions.items"
-                    :key="i"
-                    :value="item.id"
-                  >
-                    <ul class="font-weight-light">
-                      <li>
-                        {{ item.name }}
-                      </li>
-                    </ul>
-                    <v-radio
-                      v-for="(choice, i) in item.choices"
-                      :color="
-                        choice.label == 'Yes'
-                          ? 'success'
-                          : choice.label == 'No'
-                          ? 'error'
-                          : 'secondary'
-                      "
+              </v-row>
+              <v-row v-else-if="questions.type == 'group_single'">
+                <v-col cols="12" md="12">
+                  <div class="font-weight-light">
+                    {{ questions.text }}
+                  </div> </v-col
+                ><v-col cols="12" md="12">
+                  <v-row justify="space-between">
+                    <v-radio-group
+                      style="width:50%"
+                      v-model="fever"
+                      v-for="(item, i) in questions.items"
                       :key="i"
-                      :items="choice"
-                      :value="choice"
-                      outlined
                     >
-                      <template v-slot:label>
-                        <div
-                          :style="[
-                            choice.label == 'Yes'
-                              ? 'color: green'
-                              : choice.label == 'No'
-                              ? 'color: red'
-                              : 'color: blue'
-                          ]"
-                        >
-                          {{ choice.label }}
-                        </div>
-                      </template>
-                    </v-radio>
-                  </v-radio-group></v-row
-                ></v-col
-              >
-              <v-row>
+                      <div class="font-weight-light">{{ item.name }}</div>
+                      <v-radio
+                        v-for="(choice, i) in item.choices"
+                        :color="
+                          choice.label == 'Yes'
+                            ? 'success'
+                            : choice.label == 'No'
+                            ? 'error'
+                            : 'secondary'
+                        "
+                        :key="i"
+                        :items="choice"
+                        :value="choice"
+                        outlined
+                      >
+                        <template v-slot:label>
+                          <div
+                            :style="[
+                              choice.label == 'Yes'
+                                ? 'color: green'
+                                : choice.label == 'No'
+                                ? 'color: red'
+                                : 'color: blue'
+                            ]"
+                          >
+                            {{ choice.label }}
+                          </div>
+                        </template>
+                      </v-radio>
+                    </v-radio-group></v-row
+                  >
+                </v-col>
                 <v-btn
                   large
                   depressed
@@ -164,30 +104,107 @@
                   style="width:150px; height:50px"
                   @click="parseSuggestionsMultiple"
                   >Next question</v-btn
-                ></v-row
-              >
-            </v-row>
-          </span>
-          <v-row v-else-if="emptyQuestion">
-            <v-col cols="12" md="9">
-              <div class="font-weight-light">No more question</div>
-            </v-col>
-          </v-row>
-        </div>
+                >
+              </v-row>
+              <v-row v-else-if="questions.type == 'group_multiple'">
+                <v-col cols="12" md="9">
+                  <div class="font-weight-light">{{ questions.text }}</div>
+                </v-col>
 
-        <v-row v-if="questions == ''">
-          <v-col cols="12" md="9">
-            <v-container
-              ><v-row>
-                <span class="font-weight-medium">
-                  No diagnostic question found
-                </span></v-row
-              >
-            </v-container></v-col
-          ></v-row
+                <v-col cols="12" md="12">
+                  <v-row justify="space-between">
+                    <v-radio-group
+                      style="width:50%"
+                      v-model="fever"
+                      v-for="(item, i) in questions.items"
+                      :key="i"
+                      :value="item.id"
+                    >
+                      <ul class="font-weight-light">
+                        <li>
+                          {{ item.name }}
+                        </li>
+                      </ul>
+                      <v-radio
+                        v-for="(choice, i) in item.choices"
+                        :color="
+                          choice.label == 'Yes'
+                            ? 'success'
+                            : choice.label == 'No'
+                            ? 'error'
+                            : 'secondary'
+                        "
+                        :key="i"
+                        :items="choice"
+                        :value="choice"
+                        outlined
+                      >
+                        <template v-slot:label>
+                          <div
+                            :style="[
+                              choice.label == 'Yes'
+                                ? 'color: green'
+                                : choice.label == 'No'
+                                ? 'color: red'
+                                : 'color: blue'
+                            ]"
+                          >
+                            {{ choice.label }}
+                          </div>
+                        </template>
+                      </v-radio>
+                    </v-radio-group></v-row
+                  ></v-col
+                >
+                <v-row>
+                  <v-btn
+                    large
+                    depressed
+                    :disabled="!fever"
+                    color="primary"
+                    style="width:150px; height:50px"
+                    @click="parseSuggestionsMultiple"
+                    >Next question</v-btn
+                  ></v-row
+                >
+              </v-row>
+            </span>
+            <v-row v-else-if="emptyQuestion">
+              <v-col cols="12" md="9">
+                <div class="font-weight-light">No more question</div>
+              </v-col>
+            </v-row>
+          </div>
+
+          <v-row v-if="questions == ''">
+            <v-col cols="12" md="9">
+              <v-container
+                ><v-row>
+                  <span class="font-weight-medium">
+                    No diagnostic question found
+                  </span></v-row
+                >
+              </v-container></v-col
+            ></v-row
+          >
+        </v-col>
+      </v-row></v-card
+    >
+    <v-row no-gutters justify="center" class="mx-auto">
+      <v-col cols="12" md="9">
+        <v-btn
+          color="#33B47F"
+          @click="next"
+          :loading="loading"
+          height="61px"
+          class="continue-btn"
+          block
+          large
         >
-      </v-col>
-    </v-row>
+          <span class="white--text">Next</span>
+        </v-btn>
+      </v-col></v-row
+    >
   </div>
 </template>
 
@@ -344,7 +361,10 @@ export default {
           this.$store.commit("evidence/setMentions", { res });
         }
       });
-    }
+    },
+    next() {
+      this.$emit("next");
+    },
   }
 };
 </script>

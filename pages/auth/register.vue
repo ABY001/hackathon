@@ -14,7 +14,7 @@
         <v-col cols="12" md="7" sm="9">
           <v-card class="px-3 py-6 card" style="align: center">
             <v-card-subtitle class="text-center text-h4 mb-n4 font-weight-bold"
-              >Sign in</v-card-subtitle
+              >Sign Up</v-card-subtitle
             >
             <v-card-subtitle class="text-center font-weight-medium">
               Sign in to access your account... Let's get you started!!!

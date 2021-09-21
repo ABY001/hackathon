@@ -31,6 +31,11 @@ a {
 }
 
 .theme--light.v-text-field--filled > .v-input__control > .v-input__slot {
-    background: #FFFFFF !important;
+  background: #ffffff !important;
+}
+
+.v-stepper.v-sheet.theme--light {
+  box-shadow: 0px 0px 30px #02a2de2e !important;
+  border-radius: 15px !important;
 }
 </style>

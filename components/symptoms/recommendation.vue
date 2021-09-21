@@ -127,7 +127,7 @@ export default {
       }
       // Directly return the joined string
       return splitStr.join(" ");
-    }
+    },
   }
   // async getServices() {
   //   try {

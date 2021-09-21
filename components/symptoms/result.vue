@@ -1,71 +1,89 @@
 <template>
   <div>
-    <v-row no-gutters justify="center" class="mx-auto my-6">
-      <v-col cols="12" md="9" id="a-result"
-        ><span id="the-result" v-if="results.length != 0">
-          <v-row justify="start">
-            <div class="contact-doc">Results</div>
-          </v-row>
+    <v-card class="mb-12" color="lighten-1">
+      <v-row no-gutters justify="center" class="mx-auto my-6">
+        <v-col cols="12" md="9" id="a-result"
+          ><span id="the-result" v-if="results.length != 0">
+            <v-row justify="start">
+              <div class="contact-doc">Results</div>
+            </v-row>
 
-          <v-row justify="start" class="contact-divider"> <v-divider /> </v-row>
+            <v-row justify="start" class="contact-divider">
+              <v-divider />
+            </v-row>
 
-          <v-row>
-            <v-col
-              cols="12"
-              md="12"
-              v-for="(result, i) in results"
-              :key="i"
-              hide-actions
+            <v-row>
+              <v-col
+                cols="12"
+                md="12"
+                v-for="(result, i) in results"
+                :key="i"
+                hide-actions
+              >
+                <v-progress-linear
+                  :value="result.probability * 100"
+                  :color="
+                    prob(result.probability) == 'LOW'
+                      ? 'red'
+                      : prob(result.probability) == 'MEDIUM'
+                      ? 'yellow'
+                      : 'green'
+                  "
+                  height="25"
+                >
+                  <strong>{{ Math.ceil(result.probability * 100) }}%</strong>
+                </v-progress-linear>
+
+                <v-col cols="12">
+                  <v-row>
+                    The probability of this being your condition is &nbsp;
+                    <span class="font-weight-bold">
+                      {{ prob(result.probability) }}</span
+                    >
+                  </v-row>
+                  <v-row>
+                    <div
+                      class="condition-name font-weight-bold"
+                      style="font-size:22px"
+                    >
+                      {{ result.name }}
+                    </div>
+                  </v-row>
+                  <v-row>
+                    <span class="condition-subname">
+                      ({{ result.common_name }})</span
+                    >
+                  </v-row></v-col
+                >
+              </v-col>
+            </v-row>
+          </span>
+          <v-row v-else>
+            <v-col cols="12" md="9">
+              <v-container
+                ><v-row>
+                  <span class="font-weight-medium">
+                    No result found
+                  </span></v-row
+                >
+              </v-container></v-col
             >
-              <v-progress-linear
-                :value="result.probability * 100"
-                :color="
-                  prob(result.probability) == 'LOW'
-                    ? 'red'
-                    : prob(result.probability) == 'MEDIUM'
-                    ? 'yellow'
-                    : 'green'
-                "
-                height="25"
-              >
-                <strong>{{ Math.ceil(result.probability * 100) }}%</strong>
-              </v-progress-linear>
-
-              <v-col cols="12">
-                <v-row>
-                  The probability of this being your condition is &nbsp;
-                  <span class="font-weight-bold">
-                    {{ prob(result.probability) }}</span
-                  >
-                </v-row>
-                <v-row>
-                  <div
-                    class="condition-name font-weight-bold"
-                    style="font-size:22px"
-                  >
-                    {{ result.name }}
-                  </div>
-                </v-row>
-                <v-row>
-                  <span class="condition-subname">
-                    ({{ result.common_name }})</span
-                  >
-                </v-row></v-col
-              >
-            </v-col>
           </v-row>
-        </span>
-        <v-row v-else>
-           <v-col cols="12" md="9">
-            <v-container
-              ><v-row >
-                <span class="font-weight-medium">
-                  No result found
-                </span></v-row
-              >
-            </v-container></v-col
-          >
-        </v-row>
+        </v-col></v-row
+      >
+    </v-card>
+    <v-row no-gutters justify="center" class="mx-auto">
+      <v-col cols="12" md="9">
+        <v-btn
+          color="#33B47F"
+          @click="next"
+          height="61px"
+          class="continue-btn"
+          block
+          large
+        >
+          <span class="white--text">Next</span>
+        </v-btn>
       </v-col></v-row
     >
   </div>
@@ -118,6 +136,9 @@ export default {
   methods: {
     goBack() {
       this.$router.go(-1);
+    },
+    next() {
+      this.$emit("next");
     },
     prob(result) {
       return result < 0.33

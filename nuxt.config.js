@@ -43,11 +43,7 @@ export default {
 
   // Axios
   axios: {
-    credentials: true,
-    baseURL:
-      process.env.NODE_ENV === "production"
-        ? process.env.BASE_URL
-        : `http://localhost:4000/api/v1`
+    baseURL: "https://healthgear.herokuapp.com/api/v1"
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
